@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,8 +31,8 @@ public class AnimeController {
     private AnimeService animeService;
 
     @GetMapping
-    public ResponseEntity<List<Anime>> getAll() {
-        return ResponseEntity.ok(animeService.listAllAnimes());
+    public ResponseEntity<Page<Anime>> getAll(Pageable pageable) {
+        return ResponseEntity.ok(animeService.listAllAnimes(pageable));
     }
 
     @GetMapping(path = "{id}")
