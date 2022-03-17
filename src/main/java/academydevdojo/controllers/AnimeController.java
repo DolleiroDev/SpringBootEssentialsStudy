@@ -2,6 +2,8 @@ package academydevdojo.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,12 +39,12 @@ public class AnimeController {
     }
 
     @PostMapping
-    public ResponseEntity<Anime> create(@RequestBody AnimePostRequestBody anime) {
+    public ResponseEntity<Anime> create(@RequestBody @Valid AnimePostRequestBody anime) {
         return new ResponseEntity<>(animeService.create(anime), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody AnimePutRequestBody animePutRequestBody){
+    public ResponseEntity<Void> update(@RequestBody @Valid AnimePutRequestBody animePutRequestBody){
         animeService.update(animePutRequestBody);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
