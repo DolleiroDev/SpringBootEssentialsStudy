@@ -1,13 +1,11 @@
 package academydevdojo.models;
 
-
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,5 +26,6 @@ public class Anime {
     @Column
     private String genre;
     @Column
+    @JsonProperty("release_year")
     private String releaseYear;
 }

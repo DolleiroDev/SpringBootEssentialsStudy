@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import academydevdojo.mapper.AnimeMapper;
 import academydevdojo.models.Anime;
 import academydevdojo.repositories.AnimeRepository;
 import academydevdojo.repositories.AnimeRepositoryCustom;
@@ -32,11 +34,8 @@ public class AnimeService {
     }
 
     public Anime create(AnimePostRequestBody animePostRequestBody) {
-        return animeRepository.save(Anime.builder()
-        .name(animePostRequestBody.getName())
-        .genre(animePostRequestBody.getGenre())
-        .releaseYear(animePostRequestBody.getReleaseYear())
-        .build());
+        
+        return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
 
     public void delete(long id) {
@@ -45,13 +44,8 @@ public class AnimeService {
 
     public void update(AnimePutRequestBody animePutRequestBody) {
         findByIdOrThrowBadRequest(animePutRequestBody.getId());
-        Anime anime = Anime.builder()
-            .id(animePutRequestBody.getId())
-            .name(animePutRequestBody.getName())
-            .genre(animePutRequestBody.getGenre())
-            .releaseYear(animePutRequestBody.getReleaseYear())
-            .build();
-        animeRepository.save(anime);
+
+        animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePutRequestBody));
     }
 
     public List<Anime> getByGenre(String name) {

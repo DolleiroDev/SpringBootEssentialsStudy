@@ -56,7 +56,7 @@ public class AnimeController {
     }
 
     @GetMapping(path = "animeGenre/{name}")
-    public ResponseEntity<List<Anime>> getByName(@PathVariable String name){
+    public ResponseEntity<List<Anime>> filterByGenre(@PathVariable String name){
         return ResponseEntity.ok(animeService.getByGenre(name));
     }
 

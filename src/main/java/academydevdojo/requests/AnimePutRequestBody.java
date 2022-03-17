@@ -1,7 +1,5 @@
 package academydevdojo.requests;
 
-
-
 import lombok.Data;
 
 @Data
